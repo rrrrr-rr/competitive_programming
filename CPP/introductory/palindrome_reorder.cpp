@@ -2,19 +2,51 @@
 #include <string>
 #include <unordered_map>
 
+using namespace std;
+typedef long long ll;
+
 int main() {
-    std::string n;
-    std::cin >> n;
+    string n;
+    cin >> n;
 
-    // AACABACAA
-    // all chars should be even and only 1 char can be odd (1, 3, 5...)
-    // it will be in the middle
+    unordered_map <char, int> chars;
 
-    std::unordered_map<char, int> chars;
- 
-    for (char c : n) { 
-        chars[c]++; 
+    for (auto i : n) {
+        chars[i]++;
+    }
+
+    bool flag = false;
+    char middle = '\0';
+    for (auto i : chars) {
+        if (i.second % 2 == 1) {
+            if(flag) {
+                cout << "NO SOLUTION" << endl;
+                break;
+            }
+            flag = true;
+            middle = i.first;
+        }
     }
     
-    return 0;
+    for (auto i : chars) {
+        if (i.second % 2 == 0) {
+            for (int j = 0; j < i.second / 2; j++){
+                cout << i.first;
+            }
+        }
+    }
+    for (auto i : chars) {
+        if (i.first == middle) {
+            for (int j = 0; j < i.second; j++) {
+                cout << i.first;
+            }
+        }
+    }
+    for (auto i : chars) {
+        if (i.second % 2 == 0) {
+            for (int j = 0; j < i.second / 2; j++){
+                cout << i.first;
+            }
+        }
+    }
 }
